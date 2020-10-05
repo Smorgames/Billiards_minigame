@@ -27,7 +27,7 @@ public class ExitFromLevel : MonoBehaviour
     {
         Time.timeScale = 0f;
         AudioManager.instance.Play("GoodLevelEnd");
+        GAME_MANAGER.instance.StartFadeIn();
         yield return new WaitForSecondsRealtime(_timeBeforLoadNextLevel);
-        GAME_MANAGER.instance.LoadNextLevel(GAME_MANAGER.instance.GetNextLevel());
     }
 }

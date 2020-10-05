@@ -23,6 +23,8 @@ public class GAME_MANAGER : MonoBehaviour
     [SerializeField] private GameObject _exitFromLevel;
     private ExitFromLevel _exitFromLevelComponent;
 
+    private GameObject _fader;
+
     private void Start()
     {
         _exitFromLevelComponent = _exitFromLevel.GetComponent<ExitFromLevel>();
@@ -31,18 +33,19 @@ public class GAME_MANAGER : MonoBehaviour
 
         for (int i = 0; i < _spawnPoints.Length; i++)
             Instantiate(_coin, _spawnPoints[i].position, Quaternion.identity);
+
+        _fader = GameObject.FindWithTag("Fader");
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.N))
-    //        LoadNextLevel(_nextLevel);
-    //}
+    public void StartFadeIn()
+    {
+        _fader.GetComponent<Animator>().SetTrigger("FadeIn");
+    }
 
-    public void LoadNextLevel(string nextLevel)
+    public void LoadNextLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(_nextLevel);
     }
 
     public int GetScore()
